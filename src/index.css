@@ -47,4 +47,7 @@ code {
   .btn-outline {
     @apply py-2 px-4 font-semibold rounded-lg shadow-md text-green-700 bg-white  border-green-500 hover:border-green-700;
   }
+  .link  {
+    @apply border-b-4 border-transparent hover:border-green-500 cursor-pointer;
+  }
 }
