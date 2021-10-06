@@ -12,6 +12,9 @@ import {
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
+import { config } from "dotenv";
+
+config();
 
 function App() {
   //connected user

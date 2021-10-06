@@ -44,13 +44,43 @@ function About() {
         </h2>
         {/* grid of member */}
         <div className="flex flex-wrap w-full gap-10">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card
+            firstName="Salyna"
+            lastName="Gonzil"
+            gender="femme"
+            role="Product Owner"
+          />
+          <Card
+            firstName="Florian"
+            lastName="Rodier"
+            gender="homme"
+            role="Scrum master"
+          />
+          <Card
+            firstName="Alexandre"
+            lastName="Maigrot"
+            gender="homme"
+            role="Dev"
+          />
+          <Card firstName="Rémy" lastName="Loche" gender="homme" role="Dev" />
+          <Card
+            firstName="Viknesh"
+            lastName="Duraï"
+            gender="homme"
+            role="Réseau"
+          />
+          <Card
+            firstName="Bruno"
+            lastName="Pinto"
+            gender="homme"
+            role="Réseau"
+          />
+          <Card
+            firstName="Sylvain"
+            lastName="Lechervy"
+            gender="homme"
+            role="Réseau"
+          />
         </div>
       </div>
     </div>

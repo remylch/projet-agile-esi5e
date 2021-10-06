@@ -40,12 +40,32 @@ code {
     monospace;
 }
 
+/* Chrome, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #c2d2e4;
+  border-radius: 25px;
+}
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+  height: 30px;
+  border-radius: 25px;
+  background-color: #ffcb2a;
+}
+
 @layer components {
   .btn-inline {
     @apply py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-primary hover:bg-yellow-400;
   }
   .btn-outline {
-    @apply py-2 px-4 font-semibold rounded-lg shadow-md text-primary bg-white  border-primary hover:border-yellow-400;
+    @apply py-2 px-4 font-semibold rounded-lg shadow-md text-primary border hover:text-black hover:border-black border-primary bg-transparent;
+  }
+  .btn-google {
+    @apply flex items-center py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-white  border-primary hover:border-yellow-400 hover:bg-neutral100;
   }
   .link  {
     @apply border-b-4 border-transparent hover:border-primary cursor-pointer;
