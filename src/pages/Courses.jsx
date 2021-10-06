@@ -29,10 +29,6 @@ function Courses() {
   const scrollRef = useHorizontalScroll();
   const scrollRef2 = useHorizontalScroll();
   /* fetching data from youtube API */
-
-  /* TODO : put in env variable */
-  //const api_key = "AIzaSyBS374IHfUs6h72xln75_Jm - qZ3Ndzzsp8";
-
   const YOUTUBE_PLAYLIST_ITEMS_API =
     "https://www.googleapis.com/youtube/v3/playlistItems";
 

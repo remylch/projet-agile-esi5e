@@ -5,13 +5,13 @@ import { GoogleAuthProvider } from "firebase/auth";
 
 // TODO : PUT config into a .env file
 const firebaseConfig = {
-  apiKey: "AIzaSyCFWk9aIXqCP9EYxecPxtOZ0V2sYIonEYI",
-  authDomain: "projet-esi5e.firebaseapp.com",
-  projectId: "projet-esi5e",
-  storageBucket: "projet-esi5e.appspot.com",
-  messagingSenderId: "978945975949",
-  appId: "1:978945975949:web:40fc7a24f5c41d519764c4",
-  measurementId: "G-LPFHVW9QCR",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
