@@ -71,7 +71,7 @@ function About() {
           />
           <Card
             firstName="Bruno"
-            lastName="Pinto"
+            lastName="Miguel"
             gender="homme"
             role="Réseau"
           />

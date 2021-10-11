@@ -1,9 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Logo from "../images/logo.svg";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../images/logo.png";
+import { auth } from "../firebase";
+import Avatar from "./Avatar";
 
-function Navbar() {
+function Navbar({ user }) {
+  const history = useHistory();
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then((res) => {
+        console.log(res);
+        history.push("/");
+      })
+      .catch((e) => console.log(e.message));
+  };
+
   return (
     <div className="h-16 w-full shadow-sm flex items-center justify-between pl-5 pr-5">
       {/* app title */}
@@ -22,9 +35,23 @@ function Navbar() {
       </div>
       {/* app connexion */}
       <div>
-        <Link to="/login">
-          <button className="btn-inline">Login</button>
-        </Link>
+        {user ? (
+          <div className="flex items-center gap-3">
+            <Avatar url={user.photoURL} />
+            <Link to="/profile">
+              <div className="py-2 px-3 hover:shadow-md cursor-pointer rounded-md">
+                <h5>{user.displayName}</h5>
+              </div>
+            </Link>
+            <button className="btn-outline" onClick={logout}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <Link to="/login">
+            <button className="btn-inline">Login</button>
+          </Link>
+        )}
       </div>
     </div>
   );
