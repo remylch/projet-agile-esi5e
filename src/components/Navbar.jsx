@@ -19,6 +19,8 @@ function Navbar({ user }) {
     toast.info("You are now logged out");
   };
 
+  console.log(user);
+
   return (
     <div className="h-16 w-full shadow-sm flex items-center justify-between pl-5 pr-5">
       {/* app title */}
@@ -39,10 +41,12 @@ function Navbar({ user }) {
       <div>
         {user ? (
           <div className="flex items-center gap-3">
-            <Avatar url={user.photoURL} />
+            <Avatar url={user.photoURL !== null ? user.photoURL : null} />
             <Link to="/profile">
               <div className="py-2 px-3 hover:shadow-md cursor-pointer rounded-md">
-                <h5>{user.displayName}</h5>
+                <h5>
+                  {user.displayName !== null ? user.displayName : user.email}
+                </h5>
               </div>
             </Link>
             <button className="btn-outline" onClick={logout}>

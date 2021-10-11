@@ -36,7 +36,13 @@ function Login() {
     toast.success("You are now logged in");
   };
 
-  const signIn = () => {};
+  const signIn = () => {
+    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+      .then((res) => {
+        toast.success("Your account has been successfully created");
+      })
+      .catch((e) => console.log(e.message));
+  };
 
   const signup = (e) => {
     e.preventDefault();
@@ -84,7 +90,9 @@ function Login() {
             <div className="flex gap-5 flex-col">
               <div className="flex gap-5">
                 {" "}
-                <button className="btn-inline">Log in</button>
+                <button className="btn-inline" onClick={signIn}>
+                  Log in
+                </button>
                 <button onClick={signup} className="btn-outline">
                   Sign up
                 </button>
