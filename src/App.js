@@ -13,6 +13,8 @@ import {
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { config } from "dotenv";
 
 config();
@@ -34,6 +36,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+      <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
     </div>
   );
 }

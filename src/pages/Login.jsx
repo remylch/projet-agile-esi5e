@@ -10,6 +10,7 @@ import LoginImage from "../images/login_image.svg";
 import { auth, provider } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const history = useHistory();
@@ -30,9 +31,9 @@ function Login() {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const signinWithGoogle = (e) => {
-    e.preventDefault();
+  const signinWithGoogle = () => {
     signInWithPopup(auth, provider);
+    toast.success("You are now logged in");
   };
 
   const signIn = () => {};

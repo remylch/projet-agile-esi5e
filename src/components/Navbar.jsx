@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../images/logo.png";
 import { auth } from "../firebase";
 import Avatar from "./Avatar";
+import { toast } from "react-toastify";
 
 function Navbar({ user }) {
   const history = useHistory();
@@ -15,6 +16,7 @@ function Navbar({ user }) {
         history.push("/");
       })
       .catch((e) => console.log(e.message));
+    toast.info("You are now logged out");
   };
 
   return (

@@ -4,26 +4,7 @@ import imgChart from "../images/chart.png";
 import imgExercices from "../images/penandpaper.png";
 import CardCourses from "../components/Cards/CardCourses";
 import YoutubeThumbnails from "../components/YoutubeThumbnails";
-
-export function useHorizontalScroll() {
-  const elRef = useRef();
-  useEffect(() => {
-    const el = elRef.current;
-    if (el) {
-      const onWheel = (e) => {
-        if (e.deltaY == 0) return;
-        e.preventDefault();
-        el.scrollTo({
-          left: el.scrollLeft + e.deltaY,
-          behavior: "smooth",
-        });
-      };
-      el.addEventListener("wheel", onWheel);
-      return () => el.removeEventListener("wheel", onWheel);
-    }
-  }, []);
-  return elRef;
-}
+import { useHorizontalScroll } from "../utils/utils";
 
 function Courses() {
   const scrollRef = useHorizontalScroll();
@@ -56,17 +37,21 @@ function Courses() {
           <img src={imgExercices} height={130} width={130} className="mr-10" />
           <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
             <CardCourses name="The simple present" level="easy" disable />
-            <CardCourses name="The present progressive" level="easy" />
-            <CardCourses name="The past" level="medium" />
-            <CardCourses name="The simple past" level="medium" />
-            <CardCourses name="The past continous" level="medium" />
-            <CardCourses name="The present perfect" level="medium" />
-            <CardCourses name="The present perfect progressive" level="hard" />
-            <CardCourses name="The simple future" level="easy" />
-            <CardCourses name="The future progressive" level="medium" />
-            <CardCourses name="The future perfect" level="hard" />
-            <CardCourses name="The passive voice" level="medium" />
-            <CardCourses name="The subjunctive" level="medium" />
+            <CardCourses name="The present progressive" level="easy" disable />
+            <CardCourses name="The past" level="medium" disable />
+            <CardCourses name="The simple past" level="medium" disable />
+            <CardCourses name="The past continous" level="medium" disable />
+            <CardCourses name="The present perfect" level="medium" disable />
+            <CardCourses
+              name="The present perfect progressive"
+              level="hard"
+              disable
+            />
+            <CardCourses name="The simple future" level="easy" disable />
+            <CardCourses name="The future progressive" level="medium" disable />
+            <CardCourses name="The future perfect" level="hard" disable />
+            <CardCourses name="The passive voice" level="medium" disable />
+            <CardCourses name="The subjunctive" level="medium" disable />
           </div>
         </div>
       </section>
