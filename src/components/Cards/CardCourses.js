@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Qcm from "../exercices/Qcm";
 
 function CardCourses({ name, level, disable }) {
   const startExercice = () => {

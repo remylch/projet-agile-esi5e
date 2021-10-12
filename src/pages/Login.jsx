@@ -43,12 +43,16 @@ function Login() {
   const signinWithGoogle = async () => {
     await signInWithPopup(auth, provider)
       .then(async (res) => {
-        //get user by email if does not exists => create it in firestore else do nothing
-        const q = query(collection(db, "users"), where("email", "==", true));
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", res.user.email));
         const querySnapshot = await getDocs(q);
-        console.log("query snap ", querySnapshot);
         if (querySnapshot.empty) {
           addDoc(collection(db, "users"), {
+            exercicesDone: 0,
+            level: "Beginner",
+            totalGoodAnswer: 0,
+            totalMistakes: 0,
+            timePassed: 0,
             exercices: [],
             country: "France",
             email: res.user.email,
@@ -77,10 +81,15 @@ function Login() {
     createUserWithEmailAndPassword(
       auth,
       credentials.email,
-      credentials.password,
+      credentials.password
     )
       .then((res) => {
         addDoc(collection(db, "users"), {
+          exercicesDone: 0,
+          level: "Beginner",
+          totalGoodAnswer: 0,
+          totalMistakes: 0,
+          timePassed: 0,
           exercices: [],
           country: "France",
           email: res.user.email,

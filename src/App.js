@@ -1,3 +1,4 @@
+import React from "react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
@@ -11,6 +12,8 @@ import Footer from "./components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { config } from "dotenv";
+import Exercice from "./pages/Exercice";
+import Banner from "./components/Banner";
 
 config();
 
@@ -22,6 +25,7 @@ function App() {
     <div className="flex flex-col h-screen">
       <Router>
         <Navbar user={googleUser} />
+        <Banner />
         <Switch>
           <Route path="/about" component={About} />
           <Route path="/courses" component={Courses} />

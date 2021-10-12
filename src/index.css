@@ -70,4 +70,10 @@ code {
   .link  {
     @apply border-b-4 border-transparent hover:border-primary cursor-pointer;
   }
+  .question {
+    @apply text-xl text-black font-semibold;
+  }
+  .response {
+    @apply text-sm text-neutral400 font-normal;
+  }
 }
