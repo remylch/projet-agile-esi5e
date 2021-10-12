@@ -12,7 +12,7 @@ function CardCourses({ name, level, disable }) {
       className={`relative w-52 h-36 flex rounded-xl bg-white items-center justify-center ${
         disable ? "cursor-not-allowed opacity-50 " : "opacity-100 px-7"
       }`}
-      onClick={!disable && startExercice}
+      onClick={!disable ? startExercice : undefined}
     >
       <h4 className="text-lg w-52 text-center">{name}</h4>
       <h4
@@ -31,7 +31,10 @@ function CardCourses({ name, level, disable }) {
       {/* start button */}
       {!disable && (
         <div className="absolute -right-5 inset-y-0 grid items-center">
-          <Link className="w-12 h-12 bg-purple-500 rounded-full ring-4 ring-white grid place-items-center hover:bg-purple-400 transition">
+          <Link
+            className="w-12 h-12 bg-purple-500 rounded-full ring-4 ring-white grid place-items-center hover:bg-purple-400 transition"
+            to="/"
+          >
             <span className="sr-only">Watch the video</span>
             <FaPlay className="text-white w-4 ml-1" />
           </Link>

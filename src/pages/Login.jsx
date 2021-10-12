@@ -1,5 +1,4 @@
-import { Switch } from "@headlessui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import {
   signInWithEmailAndPassword,
@@ -7,15 +6,25 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import LoginImage from "../images/login_image.svg";
-import { auth, provider } from "../firebase";
+import { auth, db, provider } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  Timestamp,
+  where,
+} from "firebase/firestore";
 
 function Login() {
   const history = useHistory();
 
   const [googleUser, loading] = useAuthState(auth);
+
+  const [error, setError] = React.useState("");
 
   const checkIfUserConnected = () => {
     if (googleUser) history.push("/profile");
@@ -31,9 +40,29 @@ function Login() {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const signinWithGoogle = () => {
-    signInWithPopup(auth, provider);
-    toast.success("You are now logged in");
+  const signinWithGoogle = async () => {
+    await signInWithPopup(auth, provider)
+      .then(async (res) => {
+        //get user by email if does not exists => create it in firestore else do nothing
+        const q = query(collection(db, "users"), where("email", "==", true));
+        const querySnapshot = await getDocs(q);
+        console.log("query snap ", querySnapshot);
+        if (querySnapshot.empty) {
+          addDoc(collection(db, "users"), {
+            exercices: [],
+            country: "France",
+            email: res.user.email,
+            username: res.user.displayName,
+            isActive: true,
+            createdAt: Timestamp.now(),
+            updatedAt: Timestamp.now(),
+          });
+        } else {
+          return;
+        }
+        toast.success("You are now logged in");
+      })
+      .catch((e) => console.log(e.message));
   };
 
   const signIn = () => {
@@ -44,15 +73,24 @@ function Login() {
       .catch((e) => console.log(e.message));
   };
 
-  const signup = (e) => {
-    e.preventDefault();
+  const signup = async () => {
     createUserWithEmailAndPassword(
       auth,
       credentials.email,
       credentials.password,
     )
-      .then((res) => console.log(res))
-      .catch((e) => e.message);
+      .then((res) => {
+        addDoc(collection(db, "users"), {
+          exercices: [],
+          country: "France",
+          email: res.user.email,
+          username: res.user.displayName,
+          isActive: true,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
+        });
+      })
+      .catch((e) => setError("The email is already taken"));
   };
 
   checkIfUserConnected();
@@ -87,6 +125,7 @@ function Login() {
               className="text-black mb-10 rounded-sm bg-neutral100 h-10 p-3 w-3/5 focus:outline-none"
               onChange={handleChange}
             />
+            <h3 className="text-danger">{error.length > 0 && error}</h3>
             <div className="flex gap-5 flex-col">
               <div className="flex gap-5">
                 {" "}
@@ -109,7 +148,7 @@ function Login() {
       </div>
       <div className="flex w-2/5 items-center justify-center">
         {/* image */}
-        <img src={LoginImage} width={500} height={500} />
+        <img src={LoginImage} width={500} height={500} alt="login" />
       </div>
     </div>
   );

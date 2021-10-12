@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HeroImage from "../images/professor.svg";
-import Playlists from "../images/professor.svg";
 
 function Home() {
   return (
@@ -26,7 +25,7 @@ function Home() {
           </div>
         </div>
         <div className="flex items-center justify-center flex-1 bg-primary rounded-r-2xl">
-          <img src={HeroImage} height={450} width={450} />
+          <img src={HeroImage} height={450} width={450} alt="home professor" />
         </div>
       </div>
     </div>

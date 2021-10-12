@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import imgCourses from "../images/courses.png";
 import imgChart from "../images/chart.png";
 import imgExercices from "../images/penandpaper.png";
@@ -34,7 +34,13 @@ function Courses() {
       <section className="flex flex-col w-full h-1/4">
         <h2 className="text-white font-bold  text-3xl mb-8">Exercices</h2>
         <div className="flex w-full">
-          <img src={imgExercices} height={130} width={130} className="mr-10" />
+          <img
+            src={imgExercices}
+            height={130}
+            width={130}
+            className="mr-10"
+            alt="exercices"
+          />
           <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
             <CardCourses name="The simple present" level="easy" disable />
             <CardCourses name="The present progressive" level="easy" disable />
@@ -59,7 +65,13 @@ function Courses() {
       <section className="flex flex-col w-full h-2/5 mt-14 justify-center">
         <h2 className="text-white font-bold  text-3xl mb-2">Courses</h2>
         <div className="flex items-center">
-          <img src={imgCourses} height={130} width={130} className="mr-10" />
+          <img
+            src={imgCourses}
+            height={130}
+            width={130}
+            className="mr-10"
+            alt="courses"
+          />
           <div className="flex overflow-x-scroll gap-10" ref={scrollRef2}>
             {youtubeItems.map((item) => {
               const { id, snippet = {} } = item;
@@ -82,7 +94,13 @@ function Courses() {
       <section className="flex flex-col w-full">
         <h2 className="text-white font-bold  text-3xl mb-8">Stats</h2>
         <div className="flex w-full">
-          <img src={imgChart} height={130} width={130} className="mr-10" />
+          <img
+            src={imgChart}
+            height={130}
+            width={130}
+            className="mr-10"
+            alt="charts"
+          />
           <div className="flex items-center justify-evenly w-full">
             {/* nb course finished */}
             <div className="flex flex-col text-center">

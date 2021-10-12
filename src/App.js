@@ -4,12 +4,7 @@ import Profile from "./pages/Profile";
 import Courses from "./pages/Courses";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";

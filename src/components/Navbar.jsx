@@ -24,7 +24,7 @@ function Navbar({ user }) {
   return (
     <div className="h-16 w-full shadow-sm flex items-center justify-between pl-5 pr-5">
       {/* app title */}
-      <img src={logo} width={150} height={50} />
+      <img src={logo} width={150} height={50} alt="Logo Syntax map" />
       {/* app navigation */}
       <div className="flex gap-5 list-none">
         <Link to="/">
