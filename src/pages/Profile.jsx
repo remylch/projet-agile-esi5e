@@ -12,15 +12,7 @@ import {
   setUpUserData,
   userDataStored,
 } from "../store/appSlice";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsSpeedometer2 } from "react-icons/bs";
@@ -85,8 +77,7 @@ function Profile() {
         <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
           {/* Present simple */}
           {exercises.map((exercise) => {
-            const { data, duration, level, time } = exercise.data();
-            console.log(exercise.data());
+            const { data, duration, level, time, type, xp } = exercise.data();
             return (
               <CardCourses
                 key={time}
@@ -94,23 +85,11 @@ function Profile() {
                 level={level}
                 duration={duration}
                 data={data}
+                type={type}
+                xp={xp}
               />
             );
           })}
-          {/* 
-          <CardCourses name="The simple present" level="easy" />
-          <CardCourses name="The present progressive" level="easy" />
-          <CardCourses name="The past" level="medium" />
-          <CardCourses name="The simple past" level="medium" />
-          <CardCourses name="The past continous" level="medium" />
-          <CardCourses name="The present perfect" level="medium" />
-          <CardCourses name="The present perfect progressive" level="hard" />
-          <CardCourses name="The simple future" level="easy" />
-          <CardCourses name="The future progressive" level="medium" />
-          <CardCourses name="The future perfect" level="hard" />
-          <CardCourses name="The passive voice" level="medium" />
-          <CardCourses name="The subjunctive" level="medium" />
-          */}
           <div className="flex w-40 items-center justify-center">
             <h4 className="text-white">New content coming later...</h4>
           </div>

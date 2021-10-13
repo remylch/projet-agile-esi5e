@@ -62,6 +62,7 @@ function Login() {
             isActive: true,
             createdAt: Timestamp.now(),
             updatedAt: Timestamp.now(),
+            xp: 0,
           }).catch((e) => e.message);
         } else {
           return;
@@ -99,6 +100,7 @@ function Login() {
           isActive: true,
           createdAt: Timestamp.now(),
           updatedAt: Timestamp.now(),
+          xp: 0,
         });
       })
       .catch((e) => setError("The email is already taken"));

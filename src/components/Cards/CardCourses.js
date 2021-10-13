@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { setIsOpenModalExercice } from "../../store/appSlice";
 
-function CardCourses({ name, level, disable, duration, data }) {
+function CardCourses({ name, level, disable, duration, data, type, xp }) {
   const startExercice = () => {
     console.log("starting exercice");
   };
@@ -23,6 +23,12 @@ function CardCourses({ name, level, disable, duration, data }) {
       }`}
       onClick={!disable ? startExercice : undefined}
     >
+      <h4 className="text-black font-thin text-sm absolute right-3 top-2 capitalize">
+        {xp} xp
+      </h4>
+      <h4 className="text-black font-thin text-sm absolute left-3 top-2 uppercase">
+        {type}
+      </h4>
       <h4 className="text-lg w-52 text-center">{name}</h4>
       <h4
         className={
