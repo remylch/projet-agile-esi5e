@@ -2,9 +2,12 @@ import React from "react";
 import { FaPlay } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
-import { setIsOpenModalExercice } from "../../store/appSlice";
+import {
+  setDataCurrentExercise,
+  setIsOpenModalExercice,
+} from "../../store/appSlice";
 
-function CardCourses({ name, level, disable, duration, data, type, xp }) {
+function CardCourses({ name, level, disable, data, type, xp }) {
   const startExercice = () => {
     console.log("starting exercice");
   };
@@ -12,7 +15,9 @@ function CardCourses({ name, level, disable, duration, data, type, xp }) {
   const dispatch = useDispatch();
 
   const handleModalExercice = () => {
-    //TODO : dispatch data of the exercice to the store then open the modal
+    //dispatch data into current exercise state
+    dispatch(setDataCurrentExercise(data));
+    //dispatch state of the modal exercise => open
     dispatch(setIsOpenModalExercice());
   };
 
@@ -23,11 +28,8 @@ function CardCourses({ name, level, disable, duration, data, type, xp }) {
       }`}
       onClick={!disable ? startExercice : undefined}
     >
-      <h4 className="text-black font-thin text-sm absolute right-3 top-2 capitalize">
+      <h4 className="text-primary font-thin text-xs absolute right-3 top-2 capitalize">
         {xp} xp
-      </h4>
-      <h4 className="text-black font-thin text-sm absolute left-3 top-2 uppercase">
-        {type}
       </h4>
       <h4 className="text-lg w-52 text-center">{name}</h4>
       <h4
@@ -44,7 +46,7 @@ function CardCourses({ name, level, disable, duration, data, type, xp }) {
         {level}
       </h4>
       {/* Duration */}
-      <h5 className="absolute text-primary bottom-2 left-3">{duration} min</h5>
+      <h5 className="absolute text-fourth bottom-2 left-3 uppercase">{type}</h5>
       {/* start button */}
       {!disable && (
         <div className="absolute -right-5 inset-y-0 grid items-center cursor-pointer">

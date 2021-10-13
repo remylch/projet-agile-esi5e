@@ -1,9 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setIsOpenModalExercice } from "../store/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  cleanUpDataCurrentExercise,
+  dataCurrentExercise,
+  setIsOpenModalExercice,
+} from "../store/appSlice";
 
 function ModalExercice({ exercice, open }) {
   const dispatch = useDispatch();
+
+  //data exercise
+  const dataExercise = useSelector(dataCurrentExercise);
+  console.log("data exercise :", dataExercise);
 
   React.useEffect(() => {
     //TODO: setTimerMin and setTimerSec with exercice.duration value
@@ -39,6 +47,7 @@ function ModalExercice({ exercice, open }) {
 
   const closeModal = () => {
     dispatch(setIsOpenModalExercice());
+    dispatch(cleanUpDataCurrentExercise());
     return false;
   };
 

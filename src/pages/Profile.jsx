@@ -77,14 +77,17 @@ function Profile() {
         <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
           {/* Present simple */}
           {exercises.map((exercise) => {
-            const { data, duration, level, time, type, xp } = exercise.data();
+            const { data, level, time, type, xp, duration } = exercise.data();
+            const modifiedData = {
+              data,
+              duration,
+            };
             return (
               <CardCourses
                 key={time}
                 name={time}
                 level={level}
-                duration={duration}
-                data={data}
+                data={modifiedData}
                 type={type}
                 xp={xp}
               />
