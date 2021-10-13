@@ -71,9 +71,9 @@ code {
     @apply border-b-4 border-transparent hover:border-primary cursor-pointer;
   }
   .question {
-    @apply text-xl text-black font-semibold;
+    @apply text-xl text-black font-semibold mb-3;
   }
-  .response {
-    @apply text-sm text-neutral400 font-normal;
+  .answer {
+    @apply text-sm text-neutral400 font-normal flex items-center gap-4 mb-3;
   }
 }

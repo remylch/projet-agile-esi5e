@@ -6,7 +6,7 @@ import {
   setIsOpenModalExercice,
 } from "../store/appSlice";
 
-function ModalExercice({ exercice, open }) {
+function ModalExercice() {
   const dispatch = useDispatch();
 
   //data exercise
@@ -14,7 +14,13 @@ function ModalExercice({ exercice, open }) {
   console.log("data exercise :", dataExercise);
 
   React.useEffect(() => {
-    //TODO: setTimerMin and setTimerSec with exercice.duration value
+    //setTimerMin and setTimerSec with duration value
+    const { duration } = dataExercise;
+    const times = duration.toString().split(".");
+    const min = times[0];
+    const sec = times[1];
+    setMinutes(min);
+    setSecondes(sec);
     return;
   }, []);
 
@@ -68,6 +74,23 @@ function ModalExercice({ exercice, open }) {
             {/*body*/}
             <div className="relative p-6 flex-auto">
               {/* Questions | Exercice */}
+              {dataExercise.data.map((exo) => {
+                return (
+                  <>
+                    <h2 className="question" key={exo.question}>
+                      {exo.question}
+                    </h2>
+                    <ul className="mb-5">
+                      {exo.answers.map((answer) => (
+                        <li className="answer" key={answer}>
+                          <input type="checkbox" />
+                          {answer}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                );
+              })}
             </div>
             {/*footer*/}
             <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
