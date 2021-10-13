@@ -1,6 +1,7 @@
 export const qcmTest = [
   {
     id: 0,
+    duration: 15000, //time in ms
     question: "How are you ?",
     answers: [
       {
@@ -24,6 +25,7 @@ export const qcmTest = [
   },
   {
     id: 1,
+    duration: 15000, //time in ms
     question: "What is the color of a turtle ?",
     answers: [
       {

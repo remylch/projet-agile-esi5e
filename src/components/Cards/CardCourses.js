@@ -1,11 +1,18 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import Qcm from "../exercices/Qcm";
+import { useDispatch } from "react-redux";
+
+import { setIsOpenModalExercice } from "../../store/appSlice";
 
 function CardCourses({ name, level, disable }) {
   const startExercice = () => {
     console.log("starting exercice");
+  };
+
+  const dispatch = useDispatch();
+
+  const handleModalExercice = () => {
+    dispatch(setIsOpenModalExercice());
   };
 
   return (
@@ -32,13 +39,13 @@ function CardCourses({ name, level, disable }) {
       {/* start button */}
       {!disable && (
         <div className="absolute -right-5 inset-y-0 grid items-center">
-          <Link
+          <div
             className="w-12 h-12 bg-purple-500 rounded-full ring-4 ring-white grid place-items-center hover:bg-purple-400 transition"
-            to="/"
+            onClick={handleModalExercice}
           >
             <span className="sr-only">Watch the video</span>
             <FaPlay className="text-white w-4 ml-1" />
-          </Link>
+          </div>
         </div>
       )}
     </div>
