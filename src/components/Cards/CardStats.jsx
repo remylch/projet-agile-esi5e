@@ -6,7 +6,13 @@ function CardStats({ text, value, level, children }) {
       <div className="mb-2">{children}</div>
       <div className=" flex flex-col place-self-start justify-self-end">
         <h2 className="text-neutral400 text-xs mb-2">{text}</h2>
-        <h1 className="text-3xl text-black font-bold">{value}</h1>
+        <h1
+          className={` ${
+            level ? "text-secondary" : "text-black"
+          } text-3xl font-bold `}
+        >
+          {value}
+        </h1>
       </div>
     </div>
   );

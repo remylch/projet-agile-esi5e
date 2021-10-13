@@ -17,21 +17,30 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
+  orderBy,
   query,
-  where,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BsSpeedometer2 } from "react-icons/bs";
 
 function Profile() {
   const dispatch = useDispatch();
   const scrollRef = useHorizontalScroll();
 
+  const [exercises, setExercises] = React.useState([]);
+
   const isOpenExercice = useSelector(isOpenModalExercice);
 
-  //done one time on first load
+  //fetch every time dependancy db changed (if there is an update on the db : INSERT / DELETE / UPDATE ...)
   useEffect(() => {
+    //fetch data user from db
     fetchDataUser();
+    //fetch exercises from db
+    return onSnapshot(collection(db, "exercises"), (snapshot) => {
+      setExercises(snapshot.docs);
+    });
   }, []);
 
   //fetch data user
@@ -45,8 +54,8 @@ function Profile() {
     dispatch(setUpUserData(docSnap.data()));
   };
 
+  //user state in redux store
   const userData = useSelector(userDataStored);
-  console.log(userData);
 
   return (
     <>
@@ -67,11 +76,28 @@ function Profile() {
           <CardStats text="Time passed" value={userData.timePassed}>
             <BiTimer size={35} />
           </CardStats>
+          <CardStats text="Level" value={userData.level} level>
+            <BsSpeedometer2 size={35} />
+          </CardStats>
         </div>
         {/* start exercice */}
         <h1 className="text-xl text-white mb-5">Exercices</h1>
         <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
           {/* Present simple */}
+          {exercises.map((exercise) => {
+            const { data, duration, level, time } = exercise.data();
+            console.log(exercise.data());
+            return (
+              <CardCourses
+                key={time}
+                name={time}
+                level={level}
+                duration={duration}
+                data={data}
+              />
+            );
+          })}
+          {/* 
           <CardCourses name="The simple present" level="easy" />
           <CardCourses name="The present progressive" level="easy" />
           <CardCourses name="The past" level="medium" />
@@ -84,6 +110,7 @@ function Profile() {
           <CardCourses name="The future perfect" level="hard" />
           <CardCourses name="The passive voice" level="medium" />
           <CardCourses name="The subjunctive" level="medium" />
+          */}
           <div className="flex w-40 items-center justify-center">
             <h4 className="text-white">New content coming later...</h4>
           </div>

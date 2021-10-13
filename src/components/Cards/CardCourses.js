@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { setIsOpenModalExercice } from "../../store/appSlice";
 
-function CardCourses({ name, level, disable }) {
+function CardCourses({ name, level, disable, duration, data }) {
   const startExercice = () => {
     console.log("starting exercice");
   };
@@ -12,6 +12,7 @@ function CardCourses({ name, level, disable }) {
   const dispatch = useDispatch();
 
   const handleModalExercice = () => {
+    //TODO : dispatch data of the exercice to the store then open the modal
     dispatch(setIsOpenModalExercice());
   };
 
@@ -25,20 +26,22 @@ function CardCourses({ name, level, disable }) {
       <h4 className="text-lg w-52 text-center">{name}</h4>
       <h4
         className={
-          level === "easy"
+          level === "Easy"
             ? "text-success absolute bottom-2 right-3"
-            : level === "medium"
+            : level === "Medium"
             ? "text-yellow-500 absolute bottom-2 right-3"
-            : level === "hard"
+            : level === "Hard"
             ? "text-danger absolute bottom-2 right-3"
             : "text-white absolute bottom-2 right-3"
         }
       >
         {level}
       </h4>
+      {/* Duration */}
+      <h5 className="absolute text-primary bottom-2 left-3">{duration} min</h5>
       {/* start button */}
       {!disable && (
-        <div className="absolute -right-5 inset-y-0 grid items-center">
+        <div className="absolute -right-5 inset-y-0 grid items-center cursor-pointer">
           <div
             className="w-12 h-12 bg-purple-500 rounded-full ring-4 ring-white grid place-items-center hover:bg-purple-400 transition"
             onClick={handleModalExercice}
