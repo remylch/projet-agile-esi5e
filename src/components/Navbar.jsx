@@ -19,8 +19,6 @@ function Navbar({ user }) {
     toast.info("You are now logged out");
   };
 
-  console.log(user);
-
   return (
     <div className="h-16 w-full shadow-sm flex items-center justify-between pl-5 pr-5">
       {/* app title */}

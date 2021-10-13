@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardStats from "../components/Cards/CardStats";
 import { MdTaskAlt } from "react-icons/md";
 import { BiTaskX, BiTimer } from "react-icons/bi";
@@ -6,20 +6,47 @@ import { AiOutlineFileDone } from "react-icons/ai";
 import CardCourses from "../components/Cards/CardCourses";
 import { useHorizontalScroll } from "../utils/utils";
 import ModalExercice from "../components/ModalExercice";
-import { useSelector } from "react-redux";
-import { isOpenModalExercice } from "../store/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  isOpenModalExercice,
+  setUpUserData,
+  userDataStored,
+} from "../store/appSlice";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Profile() {
+  const dispatch = useDispatch();
   const scrollRef = useHorizontalScroll();
 
   const isOpenExercice = useSelector(isOpenModalExercice);
-  console.log(isOpenExercice);
 
-  //fetch time passed
+  //done one time on first load
+  useEffect(() => {
+    fetchDataUser();
+  }, []);
 
-  //fetch exercices done
+  //fetch data user
+  //connected user
+  const [googleUser, loading] = useAuthState(auth);
 
-  //fetch level
+  //fetch time passed / exercices done / level
+  const fetchDataUser = async () => {
+    const docRef = doc(db, "users", googleUser.uid);
+    const docSnap = await getDoc(docRef);
+    dispatch(setUpUserData(docSnap.data()));
+  };
+
+  const userData = useSelector(userDataStored);
+  console.log(userData);
 
   return (
     <>
@@ -28,16 +55,16 @@ function Profile() {
         {/* stats */}
         <h1 className="text-xl text-white mb-5">My stats</h1>
         <div className="flex w-full h-1/3 items-center gap-5 flex-wrap mb-5">
-          <CardStats text="Exercices completed" value="4">
+          <CardStats text="Exercices completed" value={userData.exercicesDone}>
             <AiOutlineFileDone className="text-blue-500" size={35} />
           </CardStats>
-          <CardStats text="Total good answers" value="55">
+          <CardStats text="Total good answers" value={userData.totalGoodAnswer}>
             <MdTaskAlt className="text-success" size={35} />
           </CardStats>
-          <CardStats text="Total mistakes" value="10">
+          <CardStats text="Total mistakes" value={userData.totalMistakes}>
             <BiTaskX className="text-danger" size={35} />
           </CardStats>
-          <CardStats text="Time passed" value="5h">
+          <CardStats text="Time passed" value={userData.timePassed}>
             <BiTimer size={35} />
           </CardStats>
         </div>

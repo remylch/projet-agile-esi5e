@@ -11,10 +11,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
-  addDoc,
   collection,
+  doc,
   getDocs,
   query,
+  setDoc,
   Timestamp,
   where,
 } from "firebase/firestore";
@@ -46,8 +47,9 @@ function Login() {
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("email", "==", res.user.email));
         const querySnapshot = await getDocs(q);
+        console.log("is empty:", querySnapshot.empty);
         if (querySnapshot.empty) {
-          addDoc(collection(db, "users"), {
+          await setDoc(doc(db, "users", res.user.uid), {
             exercicesDone: 0,
             level: "Beginner",
             totalGoodAnswer: 0,
@@ -60,7 +62,7 @@ function Login() {
             isActive: true,
             createdAt: Timestamp.now(),
             updatedAt: Timestamp.now(),
-          });
+          }).catch((e) => e.message);
         } else {
           return;
         }
@@ -81,10 +83,10 @@ function Login() {
     createUserWithEmailAndPassword(
       auth,
       credentials.email,
-      credentials.password
+      credentials.password,
     )
-      .then((res) => {
-        addDoc(collection(db, "users"), {
+      .then(async (res) => {
+        await setDoc(doc(db, "users", res.user.uid), {
           exercicesDone: 0,
           level: "Beginner",
           totalGoodAnswer: 0,
