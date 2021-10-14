@@ -112,8 +112,9 @@ function ModalExercice() {
         //set redux store with incremented value of exercicesDone
         dispatch(incrementExercicesDone());
         //potentialy set level of user
+        const actualLevel = dataUser.level;
         //Intermediate level
-        if (newUserExp >= 150) {
+        if (newUserExp >= 150 && actualLevel === "Beginner") {
           const level = "Intermediate";
           transaction.update(userRef, { level });
           sendToastLevelUp(level);
@@ -121,7 +122,7 @@ function ModalExercice() {
           dispatch(setUserLevel(level));
         }
         //Pro lvl
-        if (newUserExp >= 300) {
+        if (newUserExp >= 300 && actualLevel === "Intermediate") {
           const level = "Pro";
           transaction.update(userRef, { level });
           sendToastLevelUp(level);
