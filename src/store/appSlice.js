@@ -43,6 +43,9 @@ export const appSlice = createSlice({
     incrementExercicesDone: (state) => {
       state.userData.exercicesDone = state.userData.exercicesDone + 1;
     },
+    setTimePassed: (state, action) => {
+      state.userData.timePassed = state.userData.timePassed + action.payload;
+    },
   },
 });
 
@@ -54,6 +57,7 @@ export const {
   cleanUpDataCurrentExercise,
   setUserLevel,
   incrementExercicesDone,
+  setTimePassed,
 } = appSlice.actions;
 
 export const isOpenModalExercice = (state) => state.app.isOpenModalExercice;

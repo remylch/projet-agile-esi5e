@@ -6,7 +6,9 @@ import {
   dataCurrentExercise,
   incrementExercicesDone,
   setIsOpenModalExercice,
+  setTimePassed,
   setUserLevel,
+  userDataStored,
 } from "../store/appSlice";
 import { doc, runTransaction } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -18,10 +20,20 @@ function ModalExercice() {
 
   //data exercise
   const dataExercise = useSelector(dataCurrentExercise);
+  //data user
+  const dataUser = useSelector(userDataStored);
+
+  const convertAndGetTime = () => {
+    const times = initialTime.toString().split(".");
+    times[0] = times[0] * 60; // convert minutes to seconds
+    const totalTime = times[0] + parseInt(times[1]);
+    return parseInt(totalTime);
+  };
 
   React.useEffect(() => {
     //setTimerMin and setTimerSec with duration value
     const { duration } = dataExercise;
+    setInitialTime(duration);
     const times = duration.toString().split(".");
     const min = times[0];
     const sec = times[1];
@@ -32,6 +44,7 @@ function ModalExercice() {
 
   //------ timer -----
   // The state for our timer
+  const [initialTime, setInitialTime] = React.useState(0);
   const [minutes, setMinutes] = React.useState(0);
   const [secondes, setSecondes] = React.useState(10);
 
@@ -64,6 +77,8 @@ function ModalExercice() {
     dispatch(cleanUpDataCurrentExercise());
   };
 
+  //---- send data ----
+
   const sendToastLevelUp = (value) => {
     toast.info(`Congratulation, you are now at ${value} level, keep going !`);
   };
@@ -73,17 +88,26 @@ function ModalExercice() {
 
     //if all good answers give xp to the user
     try {
+      //TODO : check mistakes and good answers
+
       //give xp to the user
       const userRef = doc(db, "users", googleUser.uid);
       await runTransaction(db, async (transaction) => {
         const userDoc = await transaction.get(userRef);
         if (!userDoc.exists()) throw "Document dos not exist.";
+        //set time passed
+        const timeToAdd = convertAndGetTime();
+        const newUserTimePassed = userDoc.data().timePassed + timeToAdd;
+        transaction.update(userRef, {
+          timePassed: dataUser.timePassed + timeToAdd,
+        });
+        dispatch(setTimePassed(timeToAdd));
         const newUserExp = userDoc.data().xp + dataExercise.xp;
         transaction.update(userRef, { xp: newUserExp });
         toast.info(`You finished the exercise and earn ${dataExercise.xp}`);
         //set exercise completed of user
         transaction.update(userRef, {
-          exercicesDone: dataExercise.exercicesDone + 1,
+          exercicesDone: dataUser.exercicesDone + 1,
         });
         //set redux store with incremented value of exercicesDone
         dispatch(incrementExercicesDone());
