@@ -1,17 +1,23 @@
+import { toast } from "react-toastify";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUpDataCurrentExercise,
   dataCurrentExercise,
+  incrementExercicesDone,
   setIsOpenModalExercice,
+  setUserLevel,
 } from "../store/appSlice";
+import { doc, runTransaction } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function ModalExercice() {
   const dispatch = useDispatch();
+  const [googleUser] = useAuthState(auth);
 
   //data exercise
   const dataExercise = useSelector(dataCurrentExercise);
-  console.log("data exercise :", dataExercise);
 
   React.useEffect(() => {
     //setTimerMin and setTimerSec with duration value
@@ -39,6 +45,7 @@ function ModalExercice() {
         } else {
           //timer done
           //send answer
+          sendAnswers();
           return;
         }
       } else {
@@ -52,8 +59,56 @@ function ModalExercice() {
   const cancelButtonRef = React.useRef();
 
   const closeModal = () => {
+    //close the modal
     dispatch(setIsOpenModalExercice());
     dispatch(cleanUpDataCurrentExercise());
+  };
+
+  const sendToastLevelUp = (value) => {
+    toast.info(`Congratulation, you are now at ${value} level, keep going !`);
+  };
+
+  const sendAnswers = async () => {
+    //check for answers
+
+    //if all good answers give xp to the user
+    try {
+      //give xp to the user
+      const userRef = doc(db, "users", googleUser.uid);
+      await runTransaction(db, async (transaction) => {
+        const userDoc = await transaction.get(userRef);
+        if (!userDoc.exists()) throw "Document dos not exist.";
+        const newUserExp = userDoc.data().xp + dataExercise.xp;
+        transaction.update(userRef, { xp: newUserExp });
+        toast.info(`You finished the exercise and earn ${dataExercise.xp}`);
+        //set exercise completed of user
+        transaction.update(userRef, {
+          exercicesDone: dataExercise.exercicesDone + 1,
+        });
+        //set redux store with incremented value of exercicesDone
+        dispatch(incrementExercicesDone());
+        //potentialy set level of user
+        //Intermediate level
+        if (newUserExp >= 150) {
+          const level = "Intermediate";
+          transaction.update(userRef, { level });
+          sendToastLevelUp(level);
+          //set redux store with new level value
+          dispatch(setUserLevel(level));
+        }
+        //Pro lvl
+        if (newUserExp >= 300) {
+          const level = "Pro";
+          transaction.update(userRef, { level });
+          sendToastLevelUp(level);
+          //set redux store with new level value
+          dispatch(setUserLevel(level));
+        }
+      });
+    } catch (error) {
+      console.log("Transaction failed", error);
+    }
+    closeModal();
     return false;
   };
 
@@ -101,7 +156,7 @@ function ModalExercice() {
               >
                 Cancel exercise
               </button>
-              <button className="btn-inline" onClick={closeModal}>
+              <button className="btn-inline" onClick={sendAnswers}>
                 Send my answers
               </button>
             </div>

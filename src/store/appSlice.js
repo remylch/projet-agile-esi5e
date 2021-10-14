@@ -8,6 +8,8 @@ export const appSlice = createSlice({
     dataCurrentExercise: {
       data: {},
       duration: 0,
+      xp: 0,
+      exercicesDone: 0,
     },
   },
   reducers: {
@@ -25,13 +27,21 @@ export const appSlice = createSlice({
       state.userData = {};
     },
     setDataCurrentExercise: (state, action) => {
-      const { duration, data } = action.payload;
+      const { duration, data, xp, exercicesDone } = action.payload;
+      state.dataCurrentExercise.exercisesDone = exercicesDone;
+      state.dataCurrentExercise.xp = xp;
       state.dataCurrentExercise.data = data;
       state.dataCurrentExercise.duration = duration;
     },
     cleanUpDataCurrentExercise: (state) => {
       state.dataCurrentExercise.duration = 0;
       state.dataCurrentExercise.data = {};
+    },
+    setUserLevel: (state, action) => {
+      state.userData.level = action.payload;
+    },
+    incrementExercicesDone: (state) => {
+      state.userData.exercicesDone = state.userData.exercicesDone + 1;
     },
   },
 });
@@ -42,6 +52,8 @@ export const {
   cleanUpUserData,
   setDataCurrentExercise,
   cleanUpDataCurrentExercise,
+  setUserLevel,
+  incrementExercicesDone,
 } = appSlice.actions;
 
 export const isOpenModalExercice = (state) => state.app.isOpenModalExercice;
