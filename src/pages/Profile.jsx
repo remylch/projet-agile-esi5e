@@ -65,7 +65,7 @@ function Profile() {
           <CardStats text="Total mistakes" value={userData.totalMistakes}>
             <BiTaskX className="text-danger" size={35} />
           </CardStats>
-          <CardStats text="Time passed" value={userData.timePassed}>
+          <CardStats text="Time passed" value={userData.timePassed + " sec"}>
             <BiTimer size={35} />
           </CardStats>
           <CardStats text="Level" value={userData.level} level>

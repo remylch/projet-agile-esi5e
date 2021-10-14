@@ -9,7 +9,6 @@ export const appSlice = createSlice({
       data: {},
       duration: 0,
       xp: 0,
-      exercicesDone: 0,
     },
   },
   reducers: {
