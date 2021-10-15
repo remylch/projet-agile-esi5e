@@ -12,7 +12,6 @@ import Footer from "./components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { config } from "dotenv";
-import Exercice from "./pages/Exercice";
 import Banner from "./components/Banner";
 
 config();
