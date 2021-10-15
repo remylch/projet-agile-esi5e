@@ -9,6 +9,7 @@ export const appSlice = createSlice({
       data: {},
       duration: 0,
       xp: 0,
+      type: "",
     },
   },
   reducers: {
@@ -26,15 +27,18 @@ export const appSlice = createSlice({
       state.userData = {};
     },
     setDataCurrentExercise: (state, action) => {
-      const { duration, data, xp, exercicesDone } = action.payload;
+      const { duration, data, xp, exercicesDone, type } = action.payload;
       state.dataCurrentExercise.exercisesDone = exercicesDone;
       state.dataCurrentExercise.xp = xp;
       state.dataCurrentExercise.data = data;
       state.dataCurrentExercise.duration = duration;
+      state.dataCurrentExercise.type = type;
     },
     cleanUpDataCurrentExercise: (state) => {
       state.dataCurrentExercise.duration = 0;
       state.dataCurrentExercise.data = {};
+      state.dataCurrentExercise.xp = 0;
+      state.dataCurrentExercise.type = "";
     },
     setUserLevel: (state, action) => {
       state.userData.level = action.payload;

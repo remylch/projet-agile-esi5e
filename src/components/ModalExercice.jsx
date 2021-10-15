@@ -20,6 +20,7 @@ function ModalExercice() {
 
   //data exercise
   const dataExercise = useSelector(dataCurrentExercise);
+  console.log(dataExercise);
   //data user
   const dataUser = useSelector(userDataStored);
 
@@ -104,7 +105,7 @@ function ModalExercice() {
         dispatch(setTimePassed(timeToAdd));
         const newUserExp = userDoc.data().xp + dataExercise.xp;
         transaction.update(userRef, { xp: newUserExp });
-        toast.info(`You finished the exercise and earn ${dataExercise.xp}`);
+        toast.info(`You finished the exercise and earn ${dataExercise.xp}xp`);
         //set exercise completed of user
         transaction.update(userRef, {
           exercicesDone: dataUser.exercicesDone + 1,
@@ -154,23 +155,40 @@ function ModalExercice() {
             {/*body*/}
             <div className="relative p-6 flex-auto">
               {/* Questions | Exercice */}
-              {dataExercise.data.map((exo) => {
-                return (
-                  <>
-                    <h2 className="question" key={exo.question}>
-                      {exo.question}
-                    </h2>
-                    <ul className="mb-5">
-                      {exo.answers.map((answer) => (
-                        <li className="answer" key={answer}>
-                          <input type="checkbox" />
-                          {answer}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                );
-              })}
+              {dataExercise.type === "qcm" &&
+                dataExercise.data.map((exo) => {
+                  return (
+                    <>
+                      <h2 className="question" key={exo.question}>
+                        {exo.question}
+                      </h2>
+                      <ul className="mb-5">
+                        {exo.answers.map((answer) => (
+                          <li className="answer" key={answer}>
+                            <input type="checkbox" />
+                            {answer}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  );
+                })}
+              {dataExercise.type === "fill-text" && (
+                <>
+                  <h2 className="question">Fill the blank in the text :</h2>
+                  <p>{dataExercise.data.text}</p>
+                  {dataExercise.data.answers.map((possibleAnswer) => {
+                    return (
+                      <input
+                        className="rounded-xl bg-success text-white py-2 px-3 mr-2"
+                        key={possibleAnswer}
+                        type="text"
+                        placeholder="Tap your answer"
+                      />
+                    );
+                  })}
+                </>
+              )}
             </div>
             {/*footer*/}
             <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">

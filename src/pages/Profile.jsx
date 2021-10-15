@@ -55,7 +55,7 @@ function Profile() {
       <div className="flex-1 flex-col flex pl-20 pr-20 pt-10 pb-10 bg-secondary">
         {/* stats */}
         <h1 className="text-xl text-white mb-5">My stats</h1>
-        <div className="flex w-full h-1/3 items-center gap-5 flex-wrap mb-5">
+        <div className="flex w-full h-1/3 items-center gap-5 mb-5">
           <CardStats text="Exercices completed" value={userData.exercicesDone}>
             <AiOutlineFileDone className="text-blue-500" size={35} />
           </CardStats>
@@ -85,6 +85,7 @@ function Profile() {
               data,
               duration,
               xp,
+              type,
             };
             return (
               <CardCourses
@@ -101,8 +102,7 @@ function Profile() {
             <h4 className="text-white">New content coming later...</h4>
           </div>
         </div>
-        {/* Vocabulary course */}
-        {/* Grammar course */}
+        {/* fill-in-the-black text */}
       </div>
     </>
   );
