@@ -66,8 +66,9 @@ function ExercicePresentSimple() {
     setUserAnswers({ ...userAnswers, [name]: value });
   };
 
-  const submitAnswers = async () => {
-    //check
+  const submitAnswers = async (e) => {
+    e.preventDefault();
+    //check answers
     if (userAnswers.ans1.toString().toLowerCase() !== "are") {
       setDataExercise({ ...dataExercise, mistakes: dataExercise.mistakes++ });
     }
@@ -83,27 +84,29 @@ function ExercicePresentSimple() {
       toast.info(
         `Oh, you made ${dataExercise.mistakes} mistakes try again later !`,
       );
-      //update mistake of user to the number of mistake he make
+      //update user profile
       try {
-        console.log("J4AI DES ERREURS");
+        console.log("some mistakes");
         await runTransaction(db, async (transaction) => {
           const userDoc = await transaction.get(userRef);
           if (!userDoc.exists()) throw "Document dos not exist.";
           //set time passed
           const timeToAdd = convertAndGetTime(initialTime);
           //TODO : PATCH ERROR NAN ON UPDATE FIELD
-          //console.log("time to add : ", timeToAdd); => return good number
           transaction.update(userRef, {
-            timePassed: dataUser.timePassed + timeToAdd,
+            timePassed: parseInt(dataUser.timePassed) + timeToAdd,
           });
           dispatch(setTimePassed(timeToAdd));
           //give him full xp / mistakes
           const newUserExp =
-            userDoc.data().xp + dataExercise.xp / dataExercise.mistakes;
+            userDoc.data().xp +
+            dataExercise.xp -
+            (dataExercise.mistakes * dataExercise.xp) / dataExercise.nbField;
           transaction.update(userRef, { xp: newUserExp });
           toast.info(
             `You finished the exercise and earn ${
-              dataExercise.xp / dataExercise.mistakes
+              dataExercise.xp -
+              (dataExercise.mistakes * dataExercise.xp) / dataExercise.nbField
             }xp`,
           );
           //set exercise completed of user
@@ -143,13 +146,12 @@ function ExercicePresentSimple() {
             dispatch(setUserLevel(level));
           }
         });
-        history.push("/profile");
+        //history.push("/profile");
       } catch (error) {
         console.log("Transaction failed", error);
       }
-      return;
     } else {
-      console.log("J4AI TOUT BON");
+      console.log("no mistakes");
       toast.info("Congratz you passed it without mistakes !");
       try {
         await runTransaction(db, async (transaction) => {
@@ -197,12 +199,12 @@ function ExercicePresentSimple() {
             dispatch(setUserLevel(level));
           }
         });
-        history.push("/profile");
+        //history.push("/profile");
       } catch (error) {
         console.log("Transaction failed", error);
       }
     }
-    return false;
+    return;
   };
 
   return (
