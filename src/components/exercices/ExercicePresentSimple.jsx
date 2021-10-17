@@ -72,10 +72,10 @@ function ExercicePresentSimple() {
     if (userAnswers.ans1.toString().toLowerCase() !== "are") {
       setDataExercise({ ...dataExercise, mistakes: dataExercise.mistakes++ });
     }
-    if (!userAnswers.ans2.toString().toLowerCase() !== "am") {
+    if (userAnswers.ans2.toString().toLowerCase() !== "am") {
       setDataExercise({ ...dataExercise, mistakes: dataExercise.mistakes++ });
     }
-    if (!userAnswers.ans3.toString().toLowerCase() !== "is") {
+    if (userAnswers.ans3.toString().toLowerCase() !== "is") {
       setDataExercise({ ...dataExercise, mistakes: dataExercise.mistakes++ });
     }
     //get userRef from db

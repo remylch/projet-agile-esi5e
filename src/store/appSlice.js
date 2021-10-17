@@ -54,8 +54,8 @@ export const appSlice = createSlice({
         state.userData.totalMistakes + action.payload;
     },
     setGoodAnswers: (state, action) => {
-      state.userData.totalMistakes =
-        state.userData.totalMistakes + action.payload;
+      state.userData.totalGoodAnswer =
+        state.userData.totalGoodAnswer + action.payload;
     },
   },
 });
