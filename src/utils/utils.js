@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 function useHorizontalScroll() {
   const elRef = useRef();
@@ -20,4 +21,15 @@ function useHorizontalScroll() {
   return elRef;
 }
 
-export { useHorizontalScroll };
+const sendToastLevelUp = (value) => {
+  toast.info(`Congratulation, you are now at ${value} level, keep going !`);
+};
+
+const convertAndGetTime = (initialTime) => {
+  const times = initialTime.toString().split(".");
+  times[0] = times[0] * 60; // convert minutes to seconds
+  const totalTime = times[0] + parseInt(times[1]);
+  return parseInt(totalTime);
+};
+
+export { useHorizontalScroll, sendToastLevelUp, convertAndGetTime };

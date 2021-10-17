@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { config } from "dotenv";
 import Banner from "./components/Banner";
+import ExercicePresentSimple from "./components/exercices/ExercicePresentSimple";
 
 config();
 
@@ -29,6 +30,9 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/courses" component={Courses} />
           {googleUser && <Route path="/profile" component={Profile} />}
+          {googleUser && (
+            <Route path="/exercise1" component={ExercicePresentSimple} />
+          )}
           <Route path="/login" component={Login} />
           <Route path="/" component={Home} />
         </Switch>

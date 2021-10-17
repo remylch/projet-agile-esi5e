@@ -16,6 +16,8 @@ import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsSpeedometer2 } from "react-icons/bs";
+import CardCoursesRefactor from "../components/Cards/CardCoursesRefactor";
+import { RiCopperCoinLine } from "react-icons/ri";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -71,11 +73,27 @@ function Profile() {
           <CardStats text="Level" value={userData.level} level>
             <BsSpeedometer2 size={35} />
           </CardStats>
+          <CardStats text="Exp" value={userData.xp}>
+            <RiCopperCoinLine size={35} />
+          </CardStats>
         </div>
-        {/* start exercice */}
-        <h1 className="text-xl text-white mb-5">Exercices</h1>
+        {/* fill-in-the-black text */}
+        <h1 className="text-xl text-white mb-2">Fill in text</h1>
         <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
-          {/* Present simple */}
+          <CardCoursesRefactor
+            name="Present simple"
+            type="Fill in text"
+            to="/exercise1"
+            xp="150"
+            level="Easy"
+          />
+          <div className="flex w-40 items-center justify-center">
+            <h4 className="text-white">New content coming later...</h4>
+          </div>
+        </div>
+        {/* QCM */}
+        <h1 className="text-xl text-white mb-2">QCM</h1>
+        <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
           {exercises.map((exercise) => {
             const { data, level, time, type, xp, duration, exercicesDone } =
               exercise.data();
@@ -102,7 +120,6 @@ function Profile() {
             <h4 className="text-white">New content coming later...</h4>
           </div>
         </div>
-        {/* fill-in-the-black text */}
       </div>
     </>
   );
