@@ -18,7 +18,7 @@ import { convertAndGetTime, sendToastLevelUp } from "../../utils/utils";
 function ExercicePresentSimple() {
   const history = useHistory();
   //timer values
-  const [initialTime, setInitialTime] = React.useState(1.59);
+  const [initialTime] = React.useState(1.59);
   const [secondes, setSecondes] = React.useState(59);
   const [minutes, setMinutes] = React.useState(1);
 
@@ -222,7 +222,7 @@ function ExercicePresentSimple() {
           <input
             name="ans1"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
+            className="input-answer"
             value={userAnswers.ans1}
             onChange={handleChange}
           />
@@ -233,7 +233,7 @@ function ExercicePresentSimple() {
           <input
             name="ans2"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
+            className="input-answer"
             value={userAnswers.ans2}
             onChange={handleChange}
           />
@@ -244,7 +244,7 @@ function ExercicePresentSimple() {
           <input
             name="ans3"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
+            className="input-answer"
             value={userAnswers.ans3}
             onChange={handleChange}
           />
