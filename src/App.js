@@ -19,7 +19,7 @@ config();
 
 function App() {
   //connected user
-  const [googleUser, loading] = useAuthState(auth);
+  const [googleUser] = useAuthState(auth);
 
   return (
     <div className="flex flex-col h-screen">

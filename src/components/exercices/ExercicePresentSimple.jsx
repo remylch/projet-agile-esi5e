@@ -82,7 +82,7 @@ function ExercicePresentSimple() {
     const userRef = doc(db, "users", googleUser.uid);
     if (dataExercise.mistakes > 0) {
       toast.info(
-        `Oh, you made ${dataExercise.mistakes} mistakes try again later !`,
+        `Oh, you made ${dataExercise.mistakes} mistakes try again later !`
       );
       //update user profile
       try {
@@ -107,7 +107,7 @@ function ExercicePresentSimple() {
             `You finished the exercise and earn ${
               dataExercise.xp -
               (dataExercise.mistakes * dataExercise.xp) / dataExercise.nbField
-            }xp`,
+            }xp`
           );
           //set exercise completed of user
           transaction.update(userRef, {
@@ -146,7 +146,7 @@ function ExercicePresentSimple() {
             dispatch(setUserLevel(level));
           }
         });
-        //history.push("/profile");
+        history.push("/profile");
       } catch (error) {
         console.log("Transaction failed", error);
       }
@@ -199,7 +199,7 @@ function ExercicePresentSimple() {
             dispatch(setUserLevel(level));
           }
         });
-        //history.push("/profile");
+        history.push("/profile");
       } catch (error) {
         console.log("Transaction failed", error);
       }
@@ -222,7 +222,7 @@ function ExercicePresentSimple() {
           <input
             name="ans1"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2"
+            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
             value={userAnswers.ans1}
             onChange={handleChange}
           />
@@ -233,7 +233,7 @@ function ExercicePresentSimple() {
           <input
             name="ans2"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2"
+            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
             value={userAnswers.ans2}
             onChange={handleChange}
           />
@@ -244,7 +244,7 @@ function ExercicePresentSimple() {
           <input
             name="ans3"
             type="text"
-            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2"
+            className="rounded-xl bg-white ring ring-success text-black py-2 px-3 mr-2 focus:outline-none"
             value={userAnswers.ans3}
             onChange={handleChange}
           />
