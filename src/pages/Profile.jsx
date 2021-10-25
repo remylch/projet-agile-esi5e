@@ -79,44 +79,79 @@ function Profile() {
         {/* fill-in-the-black text */}
         <h1 className="text-xl text-white mb-2 text-center">Tense map</h1>
         <div className="flex">
-          {/*
-          <CardCoursesRefactor
-            name="Present simple"
-            type="Fill in text"
-            to="/exercise1"
-            xp="150"
-            level="Easy"
-          />
-          */}
           <img
             src={tenseMap}
             alt="tense map"
             className="self-center"
-            useMap="#tensemap"
+            usemap="#tensemap"
           />
-          <map name="#tensemap">
-            <Link to="/">
-              <area
-                shape="rect"
-                coords=""
-                alt=""
-                className="cursor-pointer bg-red-400"
-              />
-            </Link>
-            <Link to="/">
-              <area
-                shape="rect"
-                coords="34,44,270,350"
-                alt=""
-                className="cursor-pointer"
-              />
-            </Link>
-            <Link to="/">
-              <area shape="rect" coords="" alt="" className="cursor-pointer" />
-            </Link>
-            <Link to="/">
-              <area shape="rect" coords="" alt="" className="cursor-pointer" />
-            </Link>
+          <map name="tensemap">
+            {/* topside */}
+            <area
+              className="cursor-pointer"
+              alt="present+be+ing"
+              title="present+be+ing"
+              href=""
+              coords="310,255,60,0"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="present+mod"
+              title="present+mod"
+              href=""
+              coords="470,255,50,50"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="present+have+en"
+              title="present+have+en"
+              href=""
+              coords="618,255,70,70"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="present+be+ing"
+              title="present+be+ing"
+              href=""
+              coords="911,255,70,70"
+              shape="circle"
+            />
+            {/* botside */}
+            <area
+              className="cursor-pointer"
+              alt="past+did+ed"
+              title="past+did+ed"
+              href=""
+              coords="310,480,70,70"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="past+mod+ed"
+              title="past+mod+ed"
+              href=""
+              coords="480,480,70,70"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="past+had+en"
+              title="past+had+en"
+              href=""
+              coords="615,480,70,70"
+              shape="circle"
+            />
+            <area
+              className="cursor-pointer"
+              alt="past+waswere+ing"
+              title="past+waswere+ing"
+              href=""
+              coords="880,480,100,100"
+              shape="circle"
+            />
           </map>
         </div>
       </div>
