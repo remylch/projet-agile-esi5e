@@ -4,7 +4,6 @@ import { MdTaskAlt } from "react-icons/md";
 import { BiTaskX, BiTimer } from "react-icons/bi";
 import { AiOutlineFileDone } from "react-icons/ai";
 import CardCourses from "../components/Cards/CardCourses";
-import { useHorizontalScroll } from "../utils/utils";
 import ModalExercice from "../components/ModalExercice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,13 +18,14 @@ import { BsSpeedometer2 } from "react-icons/bs";
 import CardCoursesRefactor from "../components/Cards/CardCoursesRefactor";
 import { RiCopperCoinLine } from "react-icons/ri";
 
+//tense map
+import tenseMap from "../images/tense-map.png";
+import { Link } from "react-router-dom";
+
 function Profile() {
   const dispatch = useDispatch();
-  const scrollRef = useHorizontalScroll();
 
   const [exercises, setExercises] = React.useState([]);
-
-  const isOpenExercice = useSelector(isOpenModalExercice);
 
   //fetch every time dependancy db changed (if there is an update on the db : INSERT / DELETE / UPDATE ...)
   useEffect(() => {
@@ -39,7 +39,7 @@ function Profile() {
 
   //fetch data user
   //connected user
-  const [googleUser, loading] = useAuthState(auth);
+  const [googleUser] = useAuthState(auth);
 
   //fetch time passed / exercices done / level
   const fetchDataUser = async () => {
@@ -53,11 +53,10 @@ function Profile() {
 
   return (
     <>
-      {isOpenExercice ? <ModalExercice open={isOpenExercice} /> : null}
       <div className="flex-1 flex-col flex pl-20 pr-20 pt-10 pb-10 bg-secondary">
         {/* stats */}
         <h1 className="text-xl text-white mb-5">My stats</h1>
-        <div className="flex w-full h-1/3 items-center gap-5 mb-5">
+        <div className="flex w-full h-1/4 items-center gap-5 mb-5">
           <CardStats text="Exercices completed" value={userData.exercicesDone}>
             <AiOutlineFileDone className="text-blue-500" size={35} />
           </CardStats>
@@ -78,8 +77,9 @@ function Profile() {
           </CardStats>
         </div>
         {/* fill-in-the-black text */}
-        <h1 className="text-xl text-white mb-2">Fill in text</h1>
-        <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
+        <h1 className="text-xl text-white mb-2 text-center">Tense map</h1>
+        <div className="flex">
+          {/*
           <CardCoursesRefactor
             name="Present simple"
             type="Fill in text"
@@ -87,38 +87,37 @@ function Profile() {
             xp="150"
             level="Easy"
           />
-          <div className="flex w-40 items-center justify-center">
-            <h4 className="text-white">New content coming later...</h4>
-          </div>
-        </div>
-        {/* QCM */}
-        <h1 className="text-xl text-white mb-2">QCM</h1>
-        <div className="flex  overflow-x-scroll gap-10" ref={scrollRef}>
-          {exercises.map((exercise) => {
-            const { data, level, time, type, xp, duration, exercicesDone } =
-              exercise.data();
-            console.log(data);
-            const modifiedData = {
-              exercicesDone,
-              data,
-              duration,
-              xp,
-              type,
-            };
-            return (
-              <CardCourses
-                key={time}
-                name={time}
-                level={level}
-                data={modifiedData}
-                type={type}
-                xp={xp}
+          */}
+          <img
+            src={tenseMap}
+            alt="tense map"
+            className="self-center"
+            useMap="#tensemap"
+          />
+          <map name="#tensemap">
+            <Link to="/">
+              <area
+                shape="rect"
+                coords=""
+                alt=""
+                className="cursor-pointer bg-red-400"
               />
-            );
-          })}
-          <div className="flex w-40 items-center justify-center">
-            <h4 className="text-white">New content coming later...</h4>
-          </div>
+            </Link>
+            <Link to="/">
+              <area
+                shape="rect"
+                coords="34,44,270,350"
+                alt=""
+                className="cursor-pointer"
+              />
+            </Link>
+            <Link to="/">
+              <area shape="rect" coords="" alt="" className="cursor-pointer" />
+            </Link>
+            <Link to="/">
+              <area shape="rect" coords="" alt="" className="cursor-pointer" />
+            </Link>
+          </map>
         </div>
       </div>
     </>
