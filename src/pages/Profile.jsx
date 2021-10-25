@@ -87,14 +87,26 @@ function Profile() {
           />
           <map name="tensemap">
             {/* topside */}
-            <area
-              className="cursor-pointer"
-              alt="present+be+ing"
-              title="present+be+ing"
-              href=""
-              coords="310,255,60,0"
-              shape="circle"
-            />
+            <Link
+              to={{
+                pathname: "/mycourse",
+                state: {
+                  title: "Present Do /S tn",
+                  text: "text of the course",
+                  link: "/exercise1",
+                },
+              }}
+            >
+              <area
+                className="cursor-pointer"
+                alt="present+dodont"
+                title="present+dodont"
+                href=""
+                coords="310,255,60,0"
+                shape="circle"
+              />
+            </Link>
+
             <area
               className="cursor-pointer"
               alt="present+mod"
