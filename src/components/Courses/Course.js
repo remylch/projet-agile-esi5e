@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * @description Component of the course, take {title,text,link} in props.history.location.state
+ */
 function Course(props) {
   const { title, text, link } = props.history.location.state;
   return (

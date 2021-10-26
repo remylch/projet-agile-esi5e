@@ -15,6 +15,9 @@ import {
 } from "../../store/appSlice";
 import { convertAndGetTime, sendToastLevelUp } from "../../utils/utils";
 
+/**
+ * @description Exercice for the present simple
+ */
 function ExercicePresentSimple() {
   const history = useHistory();
   //timer values
@@ -22,7 +25,10 @@ function ExercicePresentSimple() {
   const [secondes, setSecondes] = React.useState(59);
   const [minutes, setMinutes] = React.useState(1);
 
-  //timer
+  /**
+   * Timer of the exercise
+   * useEffect is called every time variable secondes is updated
+   */
   React.useEffect(() => {
     let interval = setInterval(() => {
       clearInterval(interval);
@@ -43,17 +49,29 @@ function ExercicePresentSimple() {
   }, [secondes]);
 
   const dispatch = useDispatch();
+
+  /**
+   * get the user logged in
+   */
   const [googleUser] = useAuthState(auth);
 
+  /**
+   * Values of the answer fields
+   */
   const [userAnswers, setUserAnswers] = React.useState({
     ans1: "",
     ans2: "",
     ans3: "",
   });
 
-  //data user
+  /**
+   * data user stored in redux
+   */
   const dataUser = useSelector(userDataStored);
 
+  /**
+   * data of the exercise
+   */
   const [dataExercise, setDataExercise] = React.useState({
     mistakes: 0,
     nbField: 3,
@@ -61,11 +79,22 @@ function ExercicePresentSimple() {
     xp: 150,
   });
 
+  /**
+   * @description Change the value of userAnswers useState when user write his answer
+   * @param e : Event
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserAnswers({ ...userAnswers, [name]: value });
   };
 
+  /**
+   * @description Submit the answers =>
+   * 1 - check the data provided by user
+   * 2 - Get a userRef from the db
+   * 3 - Check for mistakes
+   * 4 - Update user document with transactionnal
+   */
   const submitAnswers = async (e) => {
     e.preventDefault();
     //check answers
@@ -82,7 +111,7 @@ function ExercicePresentSimple() {
     const userRef = doc(db, "users", googleUser.uid);
     if (dataExercise.mistakes > 0) {
       toast.info(
-        `Oh, you made ${dataExercise.mistakes} mistakes try again later !`
+        `Oh, you made ${dataExercise.mistakes} mistakes try again later !`,
       );
       //update user profile
       try {
@@ -107,7 +136,7 @@ function ExercicePresentSimple() {
             `You finished the exercise and earn ${
               dataExercise.xp -
               (dataExercise.mistakes * dataExercise.xp) / dataExercise.nbField
-            }xp`
+            }xp`,
           );
           //set exercise completed of user
           transaction.update(userRef, {

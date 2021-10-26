@@ -37,7 +37,6 @@ function Profile() {
     });
   }, []);
 
-  //fetch data user
   //connected user
   const [googleUser] = useAuthState(auth);
 

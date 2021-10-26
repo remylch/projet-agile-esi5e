@@ -8,16 +8,13 @@ import {
 } from "../../store/appSlice";
 
 function CardCourses({ name, level, disable, data, type, xp }) {
-  const startExercice = () => {
-    console.log("starting exercice");
-  };
-
   const dispatch = useDispatch();
 
+  /**
+   * @description dispatch data into current exercise state of redux then dispatch modal to open it
+   */
   const handleModalExercice = () => {
-    //dispatch data into current exercise state
     dispatch(setDataCurrentExercise(data));
-    //dispatch state of the modal exercise => open
     dispatch(setIsOpenModalExercice());
   };
 

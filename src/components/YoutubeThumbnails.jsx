@@ -1,6 +1,10 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 
+/**
+ * @description Component YoutubeThumbnail take the name of the video, the image and the youtubeId in props
+ * @param {*} name, image, youtubeId
+ */
 function YoutubeThumbnails({ name, image, youtubeId }) {
   return (
     <div className="flex flex-col">

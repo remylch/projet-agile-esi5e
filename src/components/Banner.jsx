@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * @description Banner for announcement
+ */
 function Banner() {
+  /**
+   * state of the banner (Open or not)
+   */
   const [isBannerOpen, setIsBannerOpen] = React.useState(true);
 
+  /**
+   * @description Close the Banner
+   */
   const closeBanner = () => {
     setIsBannerOpen(false);
   };

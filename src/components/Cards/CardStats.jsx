@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * @description Component that contain the stat we want of the user
+ */
 function CardStats({ text, value, level, children }) {
   return (
     <div className="h-full w-52 bg-white rounded-lg shadow-sm hover:shadow-2xl flex flex-col p-3 justify-around">

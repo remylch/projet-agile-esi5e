@@ -5,6 +5,10 @@ import { auth } from "../firebase";
 import Avatar from "./Avatar";
 import { toast } from "react-toastify";
 
+/**
+ * @description Navbar component, take an user in props
+ * @param {*} user
+ */
 function Navbar({ user }) {
   const history = useHistory();
 

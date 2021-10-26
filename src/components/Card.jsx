@@ -1,6 +1,9 @@
-import React from "react";
 import { FaFemale, FaMale } from "react-icons/fa";
 
+/**
+ * @description Component that represent a person of the team
+ * @param {*} firstName, lastName, gender, role
+ */
 function Card({ firstName, lastName, gender, role }) {
   return (
     <div className="flex h-32 w-56 rounded-xl bg-secondary pr-1">

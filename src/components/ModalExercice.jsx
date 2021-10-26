@@ -14,16 +14,30 @@ import { doc, runTransaction } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+/**
+ * @description Component Modal for exercises
+ */
 function ModalExercice() {
   const dispatch = useDispatch();
+
+  /**
+   * user logged in
+   */
   const [googleUser] = useAuthState(auth);
 
-  //data exercise
+  /**
+   * Get data of current exercise stored in redux
+   */
   const dataExercise = useSelector(dataCurrentExercise);
-  console.log(dataExercise);
-  //data user
+
+  /**
+   * Get data of user stored in redux
+   */
   const dataUser = useSelector(userDataStored);
 
+  /**
+   *  @description convert the time in seconds then return the total time
+   */
   const convertAndGetTime = () => {
     const times = initialTime.toString().split(".");
     times[0] = times[0] * 60; // convert minutes to seconds
@@ -31,6 +45,10 @@ function ModalExercice() {
     return parseInt(totalTime);
   };
 
+  /**
+   * set the timer
+   * Called on time on first rendering
+   */
   React.useEffect(() => {
     //setTimerMin and setTimerSec with duration value
     const { duration } = dataExercise;
@@ -49,6 +67,9 @@ function ModalExercice() {
   const [minutes, setMinutes] = React.useState(0);
   const [secondes, setSecondes] = React.useState(10);
 
+  /**
+   * timer of the modal exercise
+   */
   React.useEffect(() => {
     let interval = setInterval(() => {
       clearInterval(interval);
@@ -70,8 +91,14 @@ function ModalExercice() {
 
   //---- modal ----
 
+  /**
+   * ref of the cancel button
+   */
   const cancelButtonRef = React.useRef();
 
+  /**
+   * @description close the modal then cleanup data of the state DataCurrentExercise in the store
+   */
   const closeModal = () => {
     //close the modal
     dispatch(setIsOpenModalExercice());
@@ -80,10 +107,17 @@ function ModalExercice() {
 
   //---- send data ----
 
+  /**
+   * @description send a toast for level up
+   * @param value : string
+   */
   const sendToastLevelUp = (value) => {
     toast.info(`Congratulation, you are now at ${value} level, keep going !`);
   };
 
+  /**
+   * @description send the data and update the user by transactionnal
+   */
   const sendAnswers = async () => {
     //check for answers
 
