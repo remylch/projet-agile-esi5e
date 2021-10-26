@@ -20,6 +20,9 @@ import {
   where,
 } from "firebase/firestore";
 
+/**
+ * @description Login page
+ */
 function Login() {
   const history = useHistory();
 

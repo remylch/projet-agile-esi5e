@@ -6,6 +6,9 @@ import CardCourses from "../components/Cards/CardCourses";
 import YoutubeThumbnails from "../components/YoutubeThumbnails";
 import { useHorizontalScroll } from "../utils/utils";
 
+/**
+ * @description Courses Page
+ */
 function Courses() {
   const scrollRef = useHorizontalScroll();
   const scrollRef2 = useHorizontalScroll();

@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * @description Slice of the app
+ * @description initialState
+ * @description reducers that update the
+ */
 export const appSlice = createSlice({
   name: "app",
   initialState: {

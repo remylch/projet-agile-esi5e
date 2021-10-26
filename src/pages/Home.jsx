@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import HeroImage from "../images/professor.svg";
 
+/**
+ * @description Home Page
+ */
 function Home() {
   return (
     <div className=" flex flex-1 w-full bg-third">

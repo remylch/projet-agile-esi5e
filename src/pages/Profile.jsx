@@ -22,9 +22,15 @@ import { RiCopperCoinLine } from "react-icons/ri";
 import tenseMap from "../images/tense-map.png";
 import { Link } from "react-router-dom";
 
+/**
+ * @description Profile Page
+ */
 function Profile() {
   const dispatch = useDispatch();
 
+  /**
+   * all the data exercises
+   */
   const [exercises, setExercises] = React.useState([]);
 
   //fetch every time dependancy db changed (if there is an update on the db : INSERT / DELETE / UPDATE ...)

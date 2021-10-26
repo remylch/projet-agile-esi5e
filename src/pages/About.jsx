@@ -7,6 +7,9 @@ import {
 import { VscDebugStart } from "react-icons/vsc";
 import Card from "../components/Card";
 
+/**
+ * @description About page
+ */
 function About() {
   return (
     <div className="flex-1 bg-primary pl-20 pr-20 pt-10 pb-10">
