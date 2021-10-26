@@ -2,7 +2,7 @@ import React from "react";
 import {
   HiOutlineMail,
   HiPhone,
-  HiOutlineLocationMarker,
+  HiOutlineLocationMarker,     //test
 } from "react-icons/hi";
 import { VscDebugStart } from "react-icons/vsc";
 import Card from "../components/Card";
