@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from "@testing-library/react";
 import Navbar from "../Navbar";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useHistory } from "react-router-dom";
 
 afterEach(() => {
   cleanup();
