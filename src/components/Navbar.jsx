@@ -51,13 +51,19 @@ function Navbar({ user }) {
                 </h5>
               </div>
             </Link>
-            <button className="btn-outline" onClick={logout}>
+            <button
+              className="btn-outline"
+              data-testid="logout-btn"
+              onClick={logout}
+            >
               Logout
             </button>
           </div>
         ) : (
           <Link to="/login">
-            <button className="btn-inline">Login</button>
+            <button data-testid="login-btn" className="btn-inline">
+              Login
+            </button>
           </Link>
         )}
       </div>

@@ -9,6 +9,7 @@ function Avatar({ url }) {
     <>
       {url !== null ? (
         <img
+          data-testid="avatar"
           loading="lazy"
           src={url}
           id="img-avatar"
@@ -16,7 +17,11 @@ function Avatar({ url }) {
           className="h-10 rounded-full cursor-pointer transition duration-75 transform hover:scale-110"
         />
       ) : (
-        <FaUserCircle size={30} className="text-primary" />
+        <FaUserCircle
+          size={30}
+          className="text-primary"
+          data-testid="userIcon"
+        />
       )}
     </>
   );
