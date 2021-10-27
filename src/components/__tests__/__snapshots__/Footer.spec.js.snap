@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render the footer: <h6> 1`] = `
+<div
+  class="h-14 bg-white shadow-sm flex items-center justify-center"
+  data-testid="footer"
+>
+  <h6
+    data-testid="title-footer"
+  >
+    SYNTAX MAP
+  </h6>
+</div>
+`;

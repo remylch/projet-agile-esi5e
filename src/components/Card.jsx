@@ -6,7 +6,10 @@ import { FaFemale, FaMale } from "react-icons/fa";
  */
 function Card({ firstName, lastName, gender, role }) {
   return (
-    <div className="flex h-32 w-56 rounded-xl bg-secondary pr-1">
+    <div
+      data-testid="card"
+      className="flex h-32 w-56 rounded-xl bg-secondary pr-1"
+    >
       <div className="flex items-center justify-center text-white w-1/3 rounded-r-lg border-r-2">
         {gender === "homme" ? (
           <FaMale size={50} />

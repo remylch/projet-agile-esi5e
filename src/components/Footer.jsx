@@ -5,8 +5,11 @@ import React from "react";
  */
 function Footer() {
   return (
-    <div className="h-14 bg-white shadow-sm flex items-center justify-center">
-      <h6>SYNTAX MAP</h6>
+    <div
+      data-testid="footer"
+      className="h-14 bg-white shadow-sm flex items-center justify-center"
+    >
+      <h6 data-testid="title-footer">SYNTAX MAP</h6>
     </div>
   );
 }
